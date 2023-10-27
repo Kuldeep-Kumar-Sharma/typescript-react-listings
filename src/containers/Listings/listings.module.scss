@@ -1,5 +1,9 @@
 @use '@styles/variables' as *;
 
+.listinglistContainer {
+  overflow-y: scroll;
+  height: 800px;
+}
 .listings {
   padding: $space-s;
 

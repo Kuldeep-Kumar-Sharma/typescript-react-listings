@@ -22,7 +22,7 @@ const PricesHistory = () => {
   );
   const realRealStateListingHistory = listingsHistory?.find(
     (fetchListingHistory) =>
-      fetchListingHistory?.id && id && fetchListingHistory.id === parseInt(id),
+      fetchListingHistory?.id && id && parseInt(fetchListingHistory.id+"") === parseInt(id), //Can be fixed, type issues are due to modal's are not fixed, need to spend time on it.
   );
 
   useEffect(() => {
@@ -37,17 +37,19 @@ const PricesHistory = () => {
     ) {
       dispatch(fetchListingHistory(id));
     }
-  }, [dispatch, id, listingsHistory]);
+  }, [dispatch]);
   return (
-    <div className={styles['container']}>
+    <div className={styles["container"]}>
       <h1>Prices History</h1>
-      {realRealStateListingHistory?.realRealStateListingHistory &&
+      {realRealStateListingHistory &&
         realRealStateListingHistory?.realRealStateListingHistory.length > 0 &&
         realRealStateListingHistory?.realRealStateListingHistory.map(
-          (listingsHistory) => <PricesHistoryCard {...listingsHistory} />,
+          (listingsHistory) => (
+            <PricesHistoryCard key={listingsHistory.created_date} {...listingsHistory} />
+          )
         )}
 
-      <a href="/" className={styles['link']}>
+      <a href="/" className={styles["link"]}>
         &larr; Back Home
       </a>
     </div>
